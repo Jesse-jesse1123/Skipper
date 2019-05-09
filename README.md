@@ -1,0 +1,2 @@
+# Skipper
+Skipper Discord Bot
