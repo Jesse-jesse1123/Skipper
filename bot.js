@@ -29,7 +29,7 @@ client.on('ready', () => {                                                      
 
 client.on('message', msg => {                                                                         //adds event listener for sent messages
   if(msg.author.ID != 545020934868828180) {                                                             //checks if the message author's ID isn't the bot's
-    let array = message.convert(msg);                                                                     //converts messages into arrays, separating each word into its own index (see "message.js")
+    const array = message.convert(msg);                                                                     //converts messages into arrays, separating each word into its own index (see "message.js")
     console.log(array);
     language.language(msg, array, badWords);                                                              //passes message into language function to check for profanities (see "language.js")
 

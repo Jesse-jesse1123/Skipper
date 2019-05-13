@@ -3,7 +3,7 @@ const client = new Discord.Client();           //for Discord client
 
 //deletes the number of messages specified
 exports.delete1 = function(msg, num) {
-  console.log("delete1 was run\n\n");
+
 }
 
 //deletes a specified number of messages sent by a user
@@ -23,7 +23,17 @@ exports.softban = function(msg) {
 
 //bans member
 exports.ban = function(msg, ID) {
-  console.log("ban was run\n\n");
+  const user = msg.mentions.users.first();
+
+  if(user) {
+    const member = msg.guild.member(user);
+    if(member) {
+      member.ban({ reason: })
+      .then(() => { msg.reply(`Successfully banned <@${user.tag}>!`); })
+      .catch(err => { msg.reply(`I couldn't ban that person!`); console.error(err); });
+    }
+    else { msg.reply(`That person isn't in the server!`); };
+  }
 }
 
 //unbans member
