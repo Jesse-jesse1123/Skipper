@@ -14,6 +14,20 @@ exports.delete2 = function(msg, ID, num) {
 //kicks member
 exports.kick = function(msg) {
   console.log("kick was run\n\n");
+
+  const user = msg.mentions.users.first();
+  console.log(user);
+
+  if(!msg.member.highestRole.hasPermission('KICK_MEMBERS')) { msg.reply(`you can't user that command!`); }
+  else {
+    const member = msg.guild.member(user);
+    if(member) {
+      member.ban({ reason: "" })
+      .then(() => { msg.reply(`Successfully banned <@${user.tag}>!`); })
+      .catch(err => {msg.reply(`I couldn't ban that person!`); console.err(err); });
+    }
+    else { msg.reply(`that person isn't in the server!`); }
+  }
 }
 
 //bans, then unbans user (essentially kicks and deletes messages)
@@ -24,15 +38,17 @@ exports.softban = function(msg) {
 //bans member
 exports.ban = function(msg, ID) {
   const user = msg.mentions.users.first();
+  console.log(user);
 
-  if(user) {
+  if(!msg.member.highestRole.hasPermissions('BAN_MEMBERS')) { msg.reply(`you can't use that command!`); }
+  else{
     const member = msg.guild.member(user);
     if(member) {
-      member.ban({ reason: })
+      member.ban(7, { reason:"" })
       .then(() => { msg.reply(`Successfully banned <@${user.tag}>!`); })
       .catch(err => { msg.reply(`I couldn't ban that person!`); console.error(err); });
     }
-    else { msg.reply(`That person isn't in the server!`); };
+    else { msg.reply(`That person isn't in the server!`); }
   }
 }
 

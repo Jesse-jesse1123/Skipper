@@ -27,8 +27,10 @@ client.on('ready', () => {                                                      
   console.log("Ready...\n");                                                                            //log that the bot is ready
 });
 
+
+
 client.on('message', msg => {                                                                         //adds event listener for sent messages
-  if(msg.author.ID != 545020934868828180) {                                                             //checks if the message author's ID isn't the bot's
+  if(!msg.author.bot) {                                                                           //checks if the message author's ID isn't the bot's
     const array = message.convert(msg);                                                                     //converts messages into arrays, separating each word into its own index (see "message.js")
     console.log(array);
     language.language(msg, array, badWords);                                                              //passes message into language function to check for profanities (see "language.js")
@@ -39,14 +41,20 @@ client.on('message', msg => {                                                   
     else if(array.length === 2 && array[0] === "!delete" && Number(array[1]) <= 100)                      //checks if 1st array index is "delete" and second index is less than/equal to 100 (i.e. not an ID)
       { moderation.delete1(msg, array[1]); }                                                                //passes message class and second array index (num messages to be deleted) into delete1 function (see "moderation.js")
 
-    else if(array[0] === "!delete" && Number(array[3]) >1.0*Math.pow(10,16) && Number(array[5]) <= 100)   //checks if 1st array index  is "delete," 3rd index is >1.0x10^16 (i.e. an ID), and last array index is less than/equal to 100
+    else if(array[0] === "!delete" && msg.mentions.user.first() && Number(array[5]) <= 100)               //checks if 1st array index  is "delete," 3rd index is >1.0x10^16 (i.e. an ID), and last array index is less than/equal to 100
       { moderation.delete2(msg, array[array.length-3], array[array.length-1]); }                            //passes message class, 3rd array index (the user ID), and last array index (num messages to be deleted) into delete2 (see "moderation.js")
 
-    else if (array[0] === "!ban" && Number(array[3]) >1.0*Math.pow(10,16))                                //checks if the 1st array index is "ban" and the 3rd array index is >1.0x10^16 (i.e. an ID)
+    else if (array[0] === "!ban" && msg.mentions.user.first())                                //checks if the 1st array index is "ban" and the 3rd array index is >1.0x10^16 (i.e. an ID)
       { moderation.ban(msg, array[3]); }                                                                    //passes message class and 3rd array index (the user ID) into ban (see "moderation.js")
 
-    else if (array[0] === "!kick" && Number(array[3]) >1.0*Math.pow(10,16))                               //checks if the 1st array index is "kick" and the 3rd array index is >1.0x10^16 (i.e. an ID)
+    else if (array[0] === "!kick" && msg.mentions.user.first())                               //checks if the 1st array index is "kick" and the 3rd array index is >1.0x10^16 (i.e. an ID)
       { moderation.kick(msg, array[3]); }                                                                   //passes message class and 3rd array index (the user ID) into kick (see "moderation.js")
+
+    else if (array[0] === "!softban" && msg.mentions.user.first())
+      { moderation.softban(msg, array[3]); }
+
+    else if (array[0] === "!unban" && msg.mentions.user.first())
+      {moderation.unban(msg, array[3]); }
   }
 });
 

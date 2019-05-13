@@ -2,9 +2,12 @@ const Discord = require('discord.js');      //for Discord library
 const client = new Discord.Client();        //for Discord client
 const embed = new Discord.RichEmbed()       //for Discord embeds
 
-exports.basCom = function(msg, inviteURL) {
+exports.basCom = async function(msg, inviteURL) {
   // Check message contents for basic commands
     if (msg.content.startsWith('!ping')) {
+      const ping = await message.channel.send("Ping?");
+      ping.edit(`Pong! **${ping.createdTimestamp - message.createdTimestamp}ms**`)
+
       msg.reply(`Pong! -- ${client.ping}`);
       console.log("\nRequest:");
       console.group();
