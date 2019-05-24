@@ -1,3 +1,11 @@
+/******************************************************************
+ * Filename: 		moderation.js				  *
+ * Author: 		Jake Roberts				  *
+ * Date:		TBD					  *
+ * Description: 	Used for execution of moderation actions  *
+ * Dependencies: 	Discord.js library			  *
+ ******************************************************************/
+
 const Discord = require('discord.js');         //for Discord library
 const client = new Discord.Client();           //for Discord client
 

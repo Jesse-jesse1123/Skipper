@@ -35,25 +35,24 @@ client.on('message', msg => {                                                   
     console.log(array);
     language.language(msg, array, badWords);                                                              //passes message into language function to check for profanities (see "language.js")
 
-    if(array[0] === "!ping" || array[0] === "!avatar" || array[0] === "!invite")                          //checks if 1st index of array is "ping," "avatar," or "invite"
+    if(msg.content.toLowerCase.startsWith("!ping") || msg.content.toLowerCase.startsWith("!avatar") || msg.content.toLowerCase.startsWith("!invite")                         //checks if 1st index of array is "ping," "avatar," or "invite"
       { basCom.basCom(msg, inviteURL) }                                                                     //if true, pass message into basCom function (see "basCom.js")
 
-    else if(array.length === 2 && array[0] === "!delete" && Number(array[1]) <= 100)                      //checks if 1st array index is "delete" and second index is less than/equal to 100 (i.e. not an ID)
-      { moderation.delete1(msg, array[1]); }                                                                //passes message class and second array index (num messages to be deleted) into delete1 function (see "moderation.js")
+    else if(array.length === 2 && msg.content.toLowerCase.startsWith("!delete") && Number(array[1]) <= 100) {                      //checks if 1st array index is "delete" and second index is less than/equal to 100 (i.e. not an ID)
+       if(array.length === 2 && Number(array[1] <= 100) { moderation.delete1(msg, array[1]); }                                                                //passes message class and second array index (num messages to be deleted) into delete1 function (see "moderation.js")
+	else if (msg.mentions.user.first() && Number(array[5]) <= 100) { moderation.delete2(msg, array[1]); }                            //passes message class, 3rd array index (the user ID), and last array index (num messages to be deleted) into delete2 (see "moderation.js")
+	}
 
-    else if(array[0] === "!delete" && msg.mentions.user.first() && Number(array[5]) <= 100)               //checks if 1st array index  is "delete," 3rd index is >1.0x10^16 (i.e. an ID), and last array index is less than/equal to 100
-      { moderation.delete2(msg, array[array.length-3], array[array.length-1]); }                            //passes message class, 3rd array index (the user ID), and last array index (num messages to be deleted) into delete2 (see "moderation.js")
-
-    else if (array[0] === "!ban" && msg.mentions.user.first())                                //checks if the 1st array index is "ban" and the 3rd array index is >1.0x10^16 (i.e. an ID)
+    else if (msg.content.toLowerCase.startsWith("!ban") && msg.mentions.user.first())                                //checks if the 1st array index is "ban" and the 3rd array index is >1.0x10^16 (i.e. an ID)
       { moderation.ban(msg, array[3]); }                                                                    //passes message class and 3rd array index (the user ID) into ban (see "moderation.js")
 
-    else if (array[0] === "!kick" && msg.mentions.user.first())                               //checks if the 1st array index is "kick" and the 3rd array index is >1.0x10^16 (i.e. an ID)
+    else if (msg.content.toLowerCase.startsWith("!kick") && msg.mentions.user.first())                               //checks if the 1st array index is "kick" and the 3rd array index is >1.0x10^16 (i.e. an ID)
       { moderation.kick(msg, array[3]); }                                                                   //passes message class and 3rd array index (the user ID) into kick (see "moderation.js")
 
-    else if (array[0] === "!softban" && msg.mentions.user.first())
+    else if (msg.content.toLowerCase.startsWith("!softban") && msg.mentions.user.first())
       { moderation.softban(msg, array[3]); }
 
-    else if (array[0] === "!unban" && msg.mentions.user.first())
+    else if (msg.content.toLowerCase.startsWith("!unban") && msg.mentions.user.first())
       {moderation.unban(msg, array[3]); }
   }
 });
