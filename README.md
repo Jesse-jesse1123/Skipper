@@ -10,7 +10,7 @@ All psuedocode files give explanation as to how the corresponding JS code works
 1. Implementing ability to add words to bot language database
 2. ~~Implementing moving psuedocode to individual files~~
 3. Implementing ability to turn certain words on or off
-4. **Implementing ability for bot to add and remove roles from users
+4. **Implementing ability for bot to add and remove roles from users**
 5. Implementing ability for bot to use Spotify/Youtube API to search songs
 6. Implementing ability for bot to use Google API to search things
 7. **Implementing 'help' command that will DM users with a list of commands for the bot**
