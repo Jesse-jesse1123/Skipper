@@ -1,4 +1,4 @@
-# Skipper
+#Skipper
 Skipper Discord Bot
 
 First personal project
@@ -6,7 +6,7 @@ First personal project
 All files contain pseudocode giving explanation as to how the file code works
 	-> Psuedocode is written in the same formatting as the code being explained
 
-# PLANS
+##PLANS
 1. Implementing ability to add words to bot language database
 2. Implementing moving psuedocode to individual files
 3. Implementing ability to turn certain words on or off
