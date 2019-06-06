@@ -5,7 +5,7 @@
 //  Updated:      6/4/2019                                  //
 //  Description:  converts messages sent to arrays for      //
 //                easier handling                           //
-//  Dependencies: 	                                    //
+//  Dependencies: 	                                        //
 //////////////////////////////////////////////////////////////
 
 const Discord = require('discord.js');

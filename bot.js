@@ -7,12 +7,14 @@ const message = require('./message.js');                                        
 const language = require('./language.js');                                                            //for language checks
 const basCom = require('./basCom.js');                                                                //for basic commands
 const moderation = require('./moderation.js');                                                        //for performing moderation actions
-const welcome = require ('./welcome.js');                                                             //for welcoming people to the server
+const welcome = require('./welcome.js');                                                             //for welcoming people to the server
+const secret = require('./secret.js');          //not uploaded to GitHub to prevent my token from being stolen
 
 
 let badWords = [''];
 let inviteURL = "discord.gg/SvdWhY4";
 
+//language.txt is not include in repo because of extreme language contained within
 fs.open('language.txt', 'r', (err, data) => {                                                         //opens the language document
   if (err) throw err;                                                                                   //if an error, throw an error in the console
   fs.close(data, (err) => { if (err) throw err; });                                                     //close the document; if an error, throw an error in the console
@@ -35,12 +37,12 @@ client.on('message', msg => {
     console.log(array);
     language.language(msg, array, badWords);
 
-    if(msg.content.toLowerCase.startsWith("!ping") || msg.content.toLowerCase.startsWith("!avatar") || msg.content.toLowerCase.startsWith("!invite")
+    if(msg.content.toLowerCase.startsWith("!ping") || msg.content.toLowerCase.startsWith("!avatar") || msg.content.toLowerCase.startsWith("!invite"))
 	    { basCom.basCom(msg, inviteURL) }
 
 	    //what the fuck is happening here????????????????????????
     else if(array.length === 2 && msg.content.toLowerCase.startsWith("!delete") && Number(array[1]) <= 100) {
-	    if(array.length === 2 && Number(array[1] <= 100) { moderation.delete1(msg, array[1]); }
+	    if(array.length === 2 && Number(array[1] <= 100)) { moderation.delete1(msg, array[1]); }
 	else if (msg.mentions.user.first() && Number(array[5]) <= 100) { moderation.delete2(msg, array[1]); }
 	}
     else if (msg.content.toLowerCase.startsWith("!ban") && msg.mentions.user.first())
@@ -59,7 +61,8 @@ client.on('message', msg => {
 
 client.on('guildMemberAdd', member => { welcome.welcome(member); });
 
-bot_secret_token = "";
+
+bot_secret_token = secret.token();
 
 client.login(bot_secret_token);
 
