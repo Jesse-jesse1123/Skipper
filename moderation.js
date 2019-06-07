@@ -12,7 +12,7 @@ const client = new Discord.Client();           //for Discord client
 
 //deletes the number of messages specified
 exports.delete1 = function(msg, num) {
-
+  console.log("delete1 was run\n\n");
 }
 
 //deletes a specified number of messages sent by a user
@@ -45,16 +45,16 @@ exports.softban = function(msg) {
 }
 
 //bans member
-exports.ban = function(msg, ID) {
+exports.ban = function(msg, ) {
   const user = msg.mentions.users.first();
   console.log(user);
 
-  if(!msg.member.highestRole.hasPermissions('BAN_MEMBERS')) { msg.reply(`you can't use that command!`); }
+  if(!msg.member.highestRole.hasPermissions('BAN_MEMBERS') || !msg.guild.owner) { msg.reply(`you can't use that command!`); }
   else{
     const member = msg.guild.member(user);
     if(member) {
       member.ban(7, { reason:"" })
-      .then(() => { msg.reply(`Successfully banned <@${user.tag}>!`); })
+      .then(() => { msg.reply(`Successfully banned ${user.tag}!`); })
       .catch(err => { msg.reply(`I couldn't ban that person!`); console.error(err); });
     }
     else { msg.reply(`That person isn't in the server!`); }
@@ -62,6 +62,13 @@ exports.ban = function(msg, ID) {
 }
 
 //unbans member
-exports.unban = function(msg) {
+exports.unban = function(msg, id) {
   console.log("unban was run\n\n");
+
+  if(!msg.member.highestRole.hasPermissions('BAN_MEMBERS') || !msg.guild.owner) { msg.reply(`you can't use that command!`); }
+  else {
+    msg.guild.unban(id)
+    .then(() => {msg.reply(`successfully unbanned ${user.tag}!`); })
+    .catch(err => {msg.reply(`that person is already unbanned!`); console.error(err); });
+  }
 }

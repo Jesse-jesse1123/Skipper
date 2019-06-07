@@ -33,29 +33,31 @@ client.on('ready', () => {                                                      
 
 client.on('message', msg => {
   if(!msg.author.bot) {
+    msg.content = msg.content.toLowerCase();
     const array = message.convert(msg);
     console.log(array);
     language.language(msg, array, badWords);
 
-    if(msg.content.toLowerCase.startsWith("!ping") || msg.content.toLowerCase.startsWith("!avatar") || msg.content.toLowerCase.startsWith("!invite"))
+    if(msg.content.startsWith("!ping") || msg.content.startsWith("!avatar") || msg.content.startsWith("!invite"))
 	    { basCom.basCom(msg, inviteURL) }
 
-	    //what the fuck is happening here????????????????????????
-    else if(array.length === 2 && msg.content.toLowerCase.startsWith("!delete") && Number(array[1]) <= 100) {
-	    if(array.length === 2 && Number(array[1] <= 100)) { moderation.delete1(msg, array[1]); }
-	else if (msg.mentions.user.first() && Number(array[5]) <= 100) { moderation.delete2(msg, array[1]); }
-	}
-    else if (msg.content.toLowerCase.startsWith("!ban") && msg.mentions.user.first())
-	    { moderation.ban(msg, array[3]); }
+    else if(!msg.mentions.users.first() && msg.content.startsWith("!delete") && Number(array[1]) <= 100)
+      { moderation.delete1(msg, array[1]) }
 
-    else if (msg.content.toLowerCase.startsWith("!kick") && msg.mentions.user.first())
+    else if(msg.mentions.users.first() && msg.content.startsWith("!delete") && Number(array[5]) <= 100)
+      { moderation.delete2(msg, array[1]); }
+
+    else if (msg.content.startsWith("!ban")) //ID handling inside function
+	    { moderation.ban(msg, array); }
+
+    else if (msg.content.startsWith("!kick") && msg.mentions.users.first())
 	    { moderation.kick(msg, array[3]); }
 
-    else if (msg.content.toLowerCase.startsWith("!softban") && msg.mentions.user.first())
-	    { moderation.softban(msg, array[3]); }
+    else if (msg.content.startsWith("!softban")) //ID handling inside function
+	    { moderation.softban(msg, array); }
 
-    else if (msg.content.toLowerCase.startsWith("!unban") && msg.mentions.user.first())
-	    { moderation.unban(msg, array[3]); }
+    else if (msg.content.startsWith("!unban")) //ID handling inside function
+	    { moderation.unban(msg, array); }
   }
 });
 
