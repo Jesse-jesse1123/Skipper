@@ -1,10 +1,14 @@
 # moderation.js Psuedocode
 
+## Description
+`moderation.js`'s purpose is to handle moderation commands requested by the owner or users with roles that have perms to kick or ban users.
+
+## Psuedocode
 ```javascript
-/* aquire Discord JS library
+/* acquire Discord JS library
  * create new client object
  *
- * export delete1 function with passed values of the message object and a the number of messages to be deleted
+ * export delete1 function with passed values of the message object and the number of messages to be deleted
  * 	empty for now
  *
  * export delete2 function with passed values of the message object, user ID, and number of messages to be deleted

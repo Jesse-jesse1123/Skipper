@@ -1,5 +1,9 @@
 # language.js Psuedocode
 
+## Description
+`language.js`'s purpose is to check messages for any words found in the `language.txt` file
+
+## Psuedocode
 ```javascript
 /* file header with pertinent information
  *
@@ -7,7 +11,7 @@
  * initialize client object
  *
  * initialize export function
- * 	initialize boolean variable as 'false'
+ * 	initialize boolean variable `found` as 'false'
  * 	iterate through each item of the passed in array
  * 	    iterate through each item of the passed in badWords array
  * 	        if the first item is equal to the second item

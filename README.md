@@ -6,6 +6,10 @@ First personal project
 All psuedocode files give explanation as to how the corresponding JS code works
 	-> Psuedocode is written in the same formatting as the code being explained
 
+## Dependencies
+Skipper requires the `discord.js` library and a text file containing language
+	-> `npm install -g discord.js` in console to install `discord.js` library
+
 ## PLANS
 1. Implementing ability to add words to bot language database
 2. ~~Implementing moving psuedocode to individual files~~
