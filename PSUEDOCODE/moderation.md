@@ -36,6 +36,12 @@
  *
  * export unban function with passed value of message object
  * 	log in console that unban function was run
- * 	TO BE UPDATED LATER WITH CODE
+ * 	
+ *	if the message author's highest role does not have ban members perm, or they are not the server owner
+ *		reply to message author that they can't use that command
+ *	otherwise
+ *		unban the ID of the mentioned person
+ *		then reply to message author that the user was successfully unbanned
+ *		or reply to message author that the user is already unbanned and console log an error
  */
  ```

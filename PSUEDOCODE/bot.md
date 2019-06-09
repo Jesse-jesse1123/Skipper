@@ -37,17 +37,21 @@
  * 		if the message content (in lower case) starts with "!ping" or "!avatar" or "!invite"
  * 			call basCom function passing in message object and 'inviteURL' variable
  *
- * 		**IDK WHY I WROTE THE DELETE CONDITIONALS THE WAY I DID; WILL REVIEW AT A LATER TIME**
+ * 		or if the message does not mention a user, the message starts with "!delete", and the value at array index 1 as a number is less than or equal to 100
+ *			call delete1 function (in 'moderation.js') and pass in message object and array index 1
+ *		
+ *		of if the message mentions a user, the message starts with "!delete", and the value at array index 5 as a number is less than or equal to 100
+ *			call delete2 function (in 'moderation.js') and pass in message object andarray index 5
  *
- * 		or if the message content (in lower case) starts with "!ban" and the message mentions a user
- * 			call ban function (in 'moderation.js') and pass in message object and index 3 of 'array' variable
+ * 		or if the message starts with "!ban"
+ * 			call ban function (in 'moderation.js') and pass in message object and 'array' variable
  *
- *		or if the message content (in lower case) starts with "!kick" and mentions a user
+ *		or if the message starts with "!kick" and mentions a user
  *			call kick function (in 'moderation.js') and pass in message object and index 3 of 'array' variable
- *		or if the message content (in lower case) starts with "!softban" and the message mentions a user
- *			call 'softban' function (in 'moderation.js') and pass in the message object and index 3 of 'array' variable
- *		or if the message content (in lower case) starts with "!unban" and the message mentions a user
- *			call 'unban' funciton (in 'moderation.js') and pass in the message object and index 3 of 'array' variable
+ *		or if the message content starts with "!softban"
+ *			call 'softban' function (in 'moderation.js') and pass in the message object and 'array' variable
+ *		or if the message starts with "!unban"
+ *			call 'unban' funciton (in 'moderation.js') and pass in the message object and 'array' variable
  *
  * when the client signals 'guildMemberAdd' (someone joins a server) call 'welcome' function (in 'welcome.js') and pass in the member
  *

@@ -64,9 +64,9 @@ client.on('message', msg => {
 client.on('guildMemberAdd', member => { welcome.welcome(member); });
 
 
-bot_secret_token = secret.token();
+//bot_secret_token = secret.token();
 
-client.login(bot_secret_token);
+client.login(secret.token());
 
 
 
