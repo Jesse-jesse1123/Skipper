@@ -32,33 +32,37 @@ client.on('ready', () => {                                                      
 
 
 client.on('message', msg => {
+	let msgInfo = `Request:\n${msg.author.tag} -- ${msg.author.id}\n`;
   if(!msg.author.bot) {
     msg.content = msg.content.toLowerCase();
     const array = message.convert(msg);
-    console.log(array);
+    
+	let msgInfo = `Request:\n\t${msg.guild.name}\n\t${msg.author.tag} -- ${msg.author.id}\n\t${array[0]}\n\tMessage: "${msg.content}"\n\tTimestamp: ${msg.createdTimestamp}\n\n`
+	console.log(array);
     language.language(msg, array, badWords);
 
     if(msg.content.startsWith("!ping") || msg.content.startsWith("!avatar") || msg.content.startsWith("!invite"))
-	    { basCom.basCom(msg, inviteURL) }
+	    { basCom.basCom(msg, inviteURL, msgInfo); return; }
 
     else if(!msg.mentions.users.first() && msg.content.startsWith("!delete") && Number(array[1]) <= 100)
-      { moderation.delete1(msg, array[1]) }
+      { moderation.delete1(msg, array[1], msgInfo); return; }
 
     else if(msg.mentions.users.first() && msg.content.startsWith("!delete") && Number(array[5]) <= 100)
-      { moderation.delete2(msg, array[1]); }
+      { moderation.delete2(msg, array[1], msgInfo); return;}
 
     else if (msg.content.startsWith("!ban")) //ID handling inside function
-	    { moderation.ban(msg, array); }
+	    { moderation.ban(msg, array, msgInfo); return ;}
 
     else if (msg.content.startsWith("!kick") && msg.mentions.users.first())
-	    { moderation.kick(msg, array[3]); }
+	    { moderation.kick(msg, array[3], msgInfo); return; }
 
     else if (msg.content.startsWith("!softban")) //ID handling inside function
-	    { moderation.softban(msg, array); }
+	    { moderation.softban(msg, array, msgInfo); return; }
 
     else if (msg.content.startsWith("!unban")) //ID handling inside function
-	    { moderation.unban(msg, array); }
+	    { moderation.unban(msg, array, msgInfo); return ;}
   }
+	return;
 });
 
 client.on('guildMemberAdd', member => { welcome.welcome(member); });

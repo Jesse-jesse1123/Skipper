@@ -11,17 +11,25 @@ const Discord = require('discord.js');         //for Discord library
 const client = new Discord.Client();           //for Discord client
 
 //deletes the number of messages specified
-exports.delete1 = function(msg, num) {
-  console.log("delete1 was run\n\n");
+exports.delete1 = function(msg, num, msgInfo) {
+  console.log(`Request:\n`);
+	console.group();
+		console.log(`${msgInfo}Delete1`);
+		console.log(`Message: "${msg.content}"\nTimestamp: ${msg.createdTimestamp}`);
+	console.groupEnd();
 }
 
 //deletes a specified number of messages sent by a user
-exports.delete2 = function(msg, ID, num) {
-  console.log("delete2 was run\n\n");
+exports.delete2 = function(msg, ID, num, msgInfo) {
+	console.log(`Request:\n`);
+	console.group();
+		console.log(`${msgInfo}Delete2`);
+		console.log(`Message: "${msg.content}"\nTimestamp: ${msg.createdTimestamp}`);
+	console.groupEnd();
 }
 
 //kicks member
-exports.kick = function(msg) {
+exports.kick = function(msg, msgInfo) {
   console.log("kick was run\n\n");
 
   const user = msg.mentions.users.first();
@@ -37,6 +45,8 @@ exports.kick = function(msg) {
     }
     else { msg.reply(`that person isn't in the server!`); }
   }
+
+	
 }
 
 //bans, then unbans user (essentially kicks and deletes messages)

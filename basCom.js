@@ -12,28 +12,21 @@ const Discord = require('discord.js');      //for Discord library
 const client = new Discord.Client();        //for Discord client
 const embed = new Discord.RichEmbed()       //for Discord embeds
 
-exports.basCom = async function(msg, inviteURL) {
+exports.basCom = async function(msg, inviteURL, msgInfo) {
   // Check message contents for basic commands
     if (msg.content.startsWith('!ping')) {
       const ping = await msg.channel.send("Ping?");
-      ping.edit(`Pong! **${ping.createdTimestamp - msg.createdTimestamp}ms**`)
+      ping.edit(`Pong! **${ping.createdTimestamp - msg.createdTimestamp}ms**`);
 
-      console.log("\nRequest:");
-      console.group();
-      	console.log(msg.author.tag);
-      	console.log(`Message: "${msg.content}"\nTimestamp: ${msg.createdTimestamp}`);
-      console.groupEnd();
+	    console.log(msgInfo);
+	    return;
     }
-
-   if(msg.content.startsWith("!avatar")) {
+    else if(msg.content.startsWith("!avatar")) {
       msg.reply(msg.author.avatarURL);
-      console.log("\nRequest:")
-      console.group();
-      	console.log(`${msg.author.tag} -- ${msg.author.id}\nAvatar`);
-      console.groupEnd();
+      console.log(msgInfo);
+	    return;
     }
-
-    if(msg.content.startsWith("!invite")) {
+    else if(msg.content.startsWith("!invite")) {
       if(inviteURL === "") msg.channel.send(`You haven't set an invite link yet!`)
       else {
         embed
@@ -48,5 +41,23 @@ exports.basCom = async function(msg, inviteURL) {
 
         msg.channel.send({embed});
       }
+	console.log(msgInfo);
+	return;
     }
+	else if(msg.content.startsWith("!help")) {
+		console.log(msgInfo);
+		return;
+	}
+	else if(msg.content.startsWith("!readme")) {
+		console.log(msgInfo);
+		return;
+	}
+	else if(msg.content.startsWith("!psuedo")) {
+		console.log(msgInfo);
+		return;
+	}
+	else if(msg.content.startsWith("!info")) {
+		console.log(msgInfo);
+		return;
+	}
 }
