@@ -23,7 +23,7 @@
  *			create an embed with properties:
  *				title: 		 invite
  *				author: 	 message author tag with thumbnail message author avatar URL
- *				color: 		 whatever #000000 is
+ *				color: 		 a lighter blue
  *				description: 	 the invite link
  *				footer: 	 user ID with message author ID and thumbnail message author avatar URL
  *				large thumbnail: Skipper's avatar

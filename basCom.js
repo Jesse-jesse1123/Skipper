@@ -32,7 +32,7 @@ exports.basCom = async function(msg, inviteURL, msgInfo) {
         embed
           .setTitle("Invite!")
           .setAuthor(msg.author.tag, msg.author.avatarURL)
-          .setColor("#000000")
+          .setColor("#008de5")
           .setDescription(`Invite Link --> ${inviteURL}`)
           .setFooter(`User ID: ${msg.author.id}`, msg.author.avatarURL)
           .setTimestamp()
@@ -60,4 +60,38 @@ exports.basCom = async function(msg, inviteURL, msgInfo) {
 		console.log(msgInfo);
 		return;
 	}
+	else if(msg.content.startsWith("!serverinfo")) {
+		embed
+			.setTitle("Server Information")
+			.setAuthor(msg.author.tag, msg.author.avatarURL)
+			.setColor("#008de5")
+			.setDescription(`${msg.guild.name} Server Information`)
+			.setFooter(`User ID: ${msg.author.id}`, msg.author.avatarURL)
+			.setTimestamp()
+			.addField("Server Name:", msg.guild.name)
+			.addField("Server Created:", msg.guild.createdAt)
+			.addField("Owner:", msg.guild.owner)
+			.addField("# of Members", msg.guild.memberCount)
+			.addField("# of Roles", msg.guild.roles.last().position+1)
+			.addField("# of Channels", numTextChans(msg))
+			.addField("Region:", msg.guild.region)
+		msg.channel.send({embed});
+		
+		console.log(msgInfo);
+		return;
+	}
+}
+
+const numTextChans = (msg) => {
+	//console.log(msg.guild.channels);
+	let number = 0;
+	for(var i in msg.guild.channels) {
+		console.log(msg.guild.channels[i].type);
+		if(msg.guild.channels[i].type === 'text') number++;
+	}
+
+	//msg.guild.channels.forEach((number) => {
+	//	if(this.type === 'text') number++;
+	//});
+	return number;
 }

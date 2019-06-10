@@ -41,7 +41,7 @@ client.on('message', msg => {
 	console.log(array);
     language.language(msg, array, badWords);
 
-    if(msg.content.startsWith("!ping") || msg.content.startsWith("!avatar") || msg.content.startsWith("!invite"))
+    if(msg.content.startsWith("!ping") || msg.content.startsWith("!avatar") || msg.content.startsWith("!invite") || msg.content.startsWith("!serverinfo"))
 	    { basCom.basCom(msg, inviteURL, msgInfo); return; }
 
     else if(!msg.mentions.users.first() && msg.content.startsWith("!delete") && Number(array[1]) <= 100)
