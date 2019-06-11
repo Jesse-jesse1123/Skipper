@@ -12,7 +12,6 @@ const secret = require('./secret.js');          //not uploaded to GitHub to prev
 
 
 let badWords = [''];
-let inviteURL = "discord.gg/SvdWhY4";
 
 //language.txt is not include in repo because of extreme language contained within
 fs.open('language.txt', 'r', (err, data) => {                                                         //opens the language document
@@ -36,13 +35,13 @@ client.on('message', msg => {
   if(!msg.author.bot) {
     msg.content = msg.content.toLowerCase();
     const array = message.convert(msg);
-    
-	let msgInfo = `Request:\n\t${msg.guild.name}\n\t${msg.author.tag} -- ${msg.author.id}\n\t${array[0]}\n\tMessage: "${msg.content}"\n\tTimestamp: ${msg.createdTimestamp}\n\n`
-	console.log(array);
+
+  	const msgInfo = `Request:\n\t${msg.guild.name}\n\t${msg.author.tag} -- ${msg.author.id}\n\t${array[0]}\n\tMessage: "${msg.content}"\n\tTimestamp: ${msg.createdTimestamp}\n\n`
+
     language.language(msg, array, badWords);
 
     if(msg.content.startsWith("!ping") || msg.content.startsWith("!avatar") || msg.content.startsWith("!invite") || msg.content.startsWith("!serverinfo"))
-	    { basCom.basCom(msg, inviteURL, msgInfo); return; }
+      { basCom.basCom(msg, msgInfo); return; }
 
     else if(!msg.mentions.users.first() && msg.content.startsWith("!delete") && Number(array[1]) <= 100)
       { moderation.delete1(msg, array[1], msgInfo); return; }
@@ -51,16 +50,16 @@ client.on('message', msg => {
       { moderation.delete2(msg, array[1], msgInfo); return;}
 
     else if (msg.content.startsWith("!ban")) //ID handling inside function
-	    { moderation.ban(msg, array, msgInfo); return ;}
+  	  { moderation.ban(msg, array, msgInfo); return ;}
 
     else if (msg.content.startsWith("!kick") && msg.mentions.users.first())
-	    { moderation.kick(msg, array[3], msgInfo); return; }
+  	  { moderation.kick(msg, array[3], msgInfo); return; }
 
     else if (msg.content.startsWith("!softban")) //ID handling inside function
-	    { moderation.softban(msg, array, msgInfo); return; }
+  	  { moderation.softban(msg, array, msgInfo); return; }
 
     else if (msg.content.startsWith("!unban")) //ID handling inside function
-	    { moderation.unban(msg, array, msgInfo); return ;}
+  	  { moderation.unban(msg, array, msgInfo); return ;}
   }
 	return;
 });
