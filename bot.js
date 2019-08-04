@@ -1,13 +1,23 @@
-const Discord = require('discord.js');                                                                //for Discord library
-const client = new Discord.Client();                                                                  //for Discord client
-const fs = require('fs');                                                                             //for filestream
-const embed = new Discord.RichEmbed()                                                                 //for Discord embeds
-const readFile = require('./readFile.js');                                                            //for readFile function
-const message = require('./message.js');                                                              //for converting messages to arrays
-const language = require('./language.js');                                                            //for language checks
-const basCom = require('./basCom.js');                                                                //for basic commands
-const moderation = require('./moderation.js');                                                        //for performing moderation actions
-const welcome = require('./welcome.js');                                                             //for welcoming people to the server
+/////////////////////////////////////////////////////////////////
+//  Title:        bot.js                                       //
+//  Author:       Jake Roberts                                 //
+//  Created Date: 4/24/2019                                    //
+//  Updated:      6/4/2019                                     //
+//  Description:  Checks messages passed in for non-moderation //
+//  		          commands                                     //
+//  Dependencies: None                                         //
+/////////////////////////////////////////////////////////////////
+
+const Discord = require('discord.js');          //for Discord library
+const client = new Discord.Client();            //for Discord client
+const fs = require('fs');                       //for filestream
+const embed = new Discord.RichEmbed()           //for Discord embeds
+const readFile = require('./readFile.js');      //for readFile function
+const message = require('./message.js');        //for converting messages to arrays
+const language = require('./language.js');      //for language checks
+const basCom = require('./basCom.js');          //for basic commands
+const moderation = require('./moderation.js');  //for performing moderation actions
+const welcome = require('./welcome.js');        //for welcoming people to the server
 const secret = require('./secret.js');          //not uploaded to GitHub to prevent my token from being stolen
 
 

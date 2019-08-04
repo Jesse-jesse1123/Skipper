@@ -4,7 +4,7 @@
 //  Created Date: 4/24/2019                                    //
 //  Updated:      6/4/2019                                     //
 //  Description:  Checks messages passed in for non-moderation //
-//  		  commands                                     //
+//  		  commands                                             //
 //  Dependencies: None                                         //
 /////////////////////////////////////////////////////////////////
 
@@ -21,12 +21,14 @@ exports.basCom = async function(msg, inviteURL, msgInfo) {
 	    console.log(msgInfo);
 	    return;
     }
-    else if(msg.content.startsWith("!avatar")) {
+
+    if(msg.content.startsWith("!avatar")) {
       msg.reply(msg.author.avatarURL);
       console.log(msgInfo);
 	    return;
     }
-    else if(msg.content.startsWith("!invite")) {
+
+    if(msg.content.startsWith("!invite")) {
       msg.channel.createInvite().catch(console.error);
       //console.log(inviteURL.invite.find(invite => invite.code));
 
@@ -44,23 +46,28 @@ exports.basCom = async function(msg, inviteURL, msgInfo) {
 	    console.log(msgInfo);
 	    return;
     }
-	else if(msg.content.startsWith("!help")) {
+
+  if(msg.content.startsWith("!help")) {
 		console.log(msgInfo);
 		return;
 	}
-	else if(msg.content.startsWith("!readme")) {
+
+  if(msg.content.startsWith("!readme")) {
 		console.log(msgInfo);
 		return;
 	}
-	else if(msg.content.startsWith("!psuedo")) {
+
+  if(msg.content.startsWith("!psuedo")) {
 		console.log(msgInfo);
 		return;
 	}
-	else if(msg.content.startsWith("!info")) {
+
+  if(msg.content.startsWith("!info")) {
 		console.log(msgInfo);
 		return;
 	}
-	else if(msg.content.startsWith("!serverinfo")) {
+
+  if(msg.content.startsWith("!serverinfo")) {
 		embed
 			.setTitle("Server Information")
 			.setAuthor(msg.author.tag, msg.author.avatarURL)
