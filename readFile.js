@@ -11,20 +11,27 @@ const fs = require('fs');
 
 exports.readFile = function() {
   let badWords2 = [''];
-  fs.readFile('language.txt', 'utf-8', (err, data) => {
-    if(err) throw err;
 
-    let a = 0;
-    for(let i = 0; i < data.length; i++) {
-      if(data[i] === ',') {
-        a++;
-        badWords2[a] = '';
+  fs.open('language.txt', 'r', (err, data) => {                                                         //opens the language document
+    if (err) throw err;                                                                                   //if an error, throw an error in the console
+
+    fs.readFile('language.txt', 'utf-8', (err, data) => {
+      if(err) throw err;
+      let a = 0;
+      for(let i = 0; i < data.length; i++) {
+        if(data[i] === ',') {
+          a++;
+          badWords2[a] = '';
+        }
+        else badWords2[a] += data.charAt(i);
       }
-      else badWords2[a] += data.charAt(i);
-    }
+      for(var i = 0; i < badWords2.length; i++) console.log(badWords2[i]);
+      return badWords2;
+    });
 
-    for(var i = 0; i < badWords2.length; i++) console.log(badWords2[i]);
+    fs.close(data, (err) => { if (err) throw err; });
     return badWords2;
   });
+
   return badWords2;
 }

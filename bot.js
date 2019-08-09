@@ -11,7 +11,7 @@
 const Discord = require('discord.js');          //for Discord library
 const client = new Discord.Client();            //for Discord client
 const fs = require('fs');                       //for filestream
-const embed = new Discord.RichEmbed()           //for Discord embeds
+const embed = new Discord.RichEmbed();          //for Discord embeds
 const readFile = require('./readFile.js');      //for readFile function
 const message = require('./message.js');        //for converting messages to arrays
 const language = require('./language.js');      //for language checks
@@ -20,57 +20,86 @@ const moderation = require('./moderation.js');  //for performing moderation acti
 const welcome = require('./welcome.js');        //for welcoming people to the server
 const secret = require('./secret.js');          //not uploaded to GitHub to prevent my token from being stolen
 
-
 let badWords = [''];
-
-//language.txt is not include in repo because of extreme language contained within
-fs.open('language.txt', 'r', (err, data) => {                                                         //opens the language document
-  if (err) throw err;                                                                                   //if an error, throw an error in the console
-  fs.close(data, (err) => { if (err) throw err; });                                                     //close the document; if an error, throw an error in the console
-});
 
 badWords = readFile.readFile();                                                                       //load profanities into memory
 
-                                                                                                      //Connects to Discord
-client.on('ready', () => {                                                                            //when client is ready/connected
-  console.clear();                                                                                      //clear the console
-  console.log(`Connected as ${client.user.tag} -- ${client.user.id}`);                                  //log that the bot is connected as Skipper with ID
-  console.log("Ready...\n");                                                                            //log that the bot is ready
+/********************************************************************************
+ * "Ready Function"                                                             *
+ * Listens for a 'ready' signal when it connect to Discord                      *
+ * When the client is connected, the function clears the console and logs to the*
+ *  console that it is connected with the ID of Skipper (the bot), and that it  *
+ *  is ready                                                                    *
+ ********************************************************************************/
+
+client.on('ready', () => {
+  console.clear();
+  console.log(`Connected as ${client.user.tag} -- ${client.user.id}`);
+  console.log("Ready...\n");
 });
 
+/********************************************************************************
+ * "Message Function"                                                           *
+ * Listens for messages sent to servers that it is in                           *
+ * When a message is sent to a server, this function first checks if the message*
+ *  was not sent by a bot, converts it all to lower case, converts it to an     *
+ *  array, initializes a const variable that holds information about the message*
+ *  (server it was sent in, tag, ID, message content, and timestamp). Then      *
+ *  checks the message for language, and checks for any commands in the message *
+ ********************************************************************************/
 
+client.on('message', async msg => {
+	//let msgInfo = `Request:\n${msg.author.tag} -- ${msg.author.id}\n`;
+  if(msg.author.bot) return;
 
-client.on('message', msg => {
-	let msgInfo = `Request:\n${msg.author.tag} -- ${msg.author.id}\n`;
-  if(!msg.author.bot) {
-    msg.content = msg.content.toLowerCase();
-    const array = message.convert(msg);
+  msg.content = msg.content.toLowerCase();
+  const array = message.convert(msg);
 
-  	const msgInfo = `Request:\n\t${msg.guild.name}\n\t${msg.author.tag} -- ${msg.author.id}\n\t${array[0]}\n\tMessage: "${msg.content}"\n\tTimestamp: ${msg.createdTimestamp}\n\n`
+	const msgInfo = `Request:\n\t${msg.guild.name}\n\t${msg.author.tag} -- ${msg.author.id}\n\t${array[0]}\n\tMessage: "${msg.content}"\n\tTimestamp: ${msg.createdTimestamp}\n\n`
 
-    language.language(msg, array, badWords);
+  language.language(msg, array, badWords);
 
-    if(msg.content.startsWith("!ping") || msg.content.startsWith("!avatar") || msg.content.startsWith("!invite") || msg.content.startsWith("!serverinfo"))
-      { basCom.basCom(msg, msgInfo); return; }
-
-    else if(!msg.mentions.users.first() && msg.content.startsWith("!delete") && Number(array[1]) <= 100)
-      { moderation.delete1(msg, array[1], msgInfo); return; }
-
-    else if(msg.mentions.users.first() && msg.content.startsWith("!delete") && Number(array[5]) <= 100)
-      { moderation.delete2(msg, array[1], msgInfo); return;}
-
-    else if (msg.content.startsWith("!ban")) //ID handling inside function
-  	  { moderation.ban(msg, array, msgInfo); return ;}
-
-    else if (msg.content.startsWith("!kick") && msg.mentions.users.first())
-  	  { moderation.kick(msg, array[3], msgInfo); return; }
-
-    else if (msg.content.startsWith("!softban")) //ID handling inside function
-  	  { moderation.softban(msg, array, msgInfo); return; }
-
-    else if (msg.content.startsWith("!unban")) //ID handling inside function
-  	  { moderation.unban(msg, array, msgInfo); return ;}
+  if(!msg.mentions.users.first() && msg.content.startsWith("!delete") && Number(array[1]) <= 100)
+  {
+    moderation.delete1(msg, array[1], msgInfo);
+    return;
   }
+
+  if(msg.mentions.users.first() && msg.content.startsWith("!delete") && Number(array[5]) <= 100)
+  {
+    moderation.delete2(msg, array[1], msgInfo);
+    return;
+  }
+
+  if (msg.content.startsWith("!ban"))
+	{
+    moderation.ban(msg, array, msgInfo);
+    return;
+  }
+
+  if (msg.content.startsWith("!kick") && msg.mentions.users.first())
+	{
+    moderation.kick(msg, array[3], msgInfo);
+    return;
+  }
+
+  if(msg.content.startsWith("!softban"))
+  {
+    moderation.ban(msg, array, msgInfo);
+    moderation.unban(msg, array, msgInfo);
+    return;
+  }
+
+  if (msg.content.startsWith("!unban")) //ID handling inside function
+	{
+    moderation.unban(msg, array, msgInfo);
+    return;
+  }
+
+
+    basCom.basCom(msg, msgInfo);
+    return;
+
 	return;
 });
 

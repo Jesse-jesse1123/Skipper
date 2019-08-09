@@ -10,7 +10,8 @@
 
 const Discord = require('discord.js');      //for Discord library
 const client = new Discord.Client();        //for Discord client
-const embed = new Discord.RichEmbed()       //for Discord embeds
+const embed = new Discord.RichEmbed();      //for Discord embeds
+const fs = require('fs');                   //for filestream
 
 exports.basCom = async function(msg, inviteURL, msgInfo) {
   // Check message contents for basic commands
@@ -53,7 +54,25 @@ exports.basCom = async function(msg, inviteURL, msgInfo) {
 	}
 
   if(msg.content.startsWith("!readme")) {
-		console.log(msgInfo);
+
+    let readme = "";
+
+    readme = fs.open('README.md', 'r', (err, data) => {
+      if (err) { throw err; console.log(msgInfo + `\tREADME.md could not be opened`); }
+
+      let temp;
+
+      temp = fs.readFile('README.md', 'utf-8', (err, data) => {
+        if(err) throw err;
+        return data;
+      });
+
+      return temp;
+    });
+
+    msg.channel.send(readme);
+
+    console.log(msgInfo);
 		return;
 	}
 
