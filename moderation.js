@@ -46,16 +46,28 @@ exports.kick = function(msg, msgInfo) {
     else { msg.reply(`that person isn't in the server!`); }
   }
 
-	
+
 }
 
 //bans, then unbans user (essentially kicks and deletes messages)
 exports.softban = function(msg) {
   console.log("softban was run\n\n");
+
+  if(!msg.member.highestRole.hasPermissions('BAN_MEMBERS') || !msg.guild.owner) { msg.reply(`you cna't use that command!`); }
+  else {
+    const member = msg.guild.member(user);
+    if(member) {
+      member.ban(7, {reason:""})
+      .then(() => { msg.guild.unban(msg.member.id) })
+      .then(() => { msg.reply(`Successfully softbanned ${user.tag}!`); })
+      .catch(err => { msg.reply(`I couldn't ban that person!`); console.error(err); });
+    }
+    else {msg.reply(`That person isn't in ther server!`); }
+  }
 }
 
 //bans member
-exports.ban = function(msg, ) {
+exports.ban = function(msg) {
   const user = msg.mentions.users.first();
   console.log(user);
 
@@ -72,12 +84,12 @@ exports.ban = function(msg, ) {
 }
 
 //unbans member
-exports.unban = function(msg, id) {
+exports.unban = function(msg) {
   console.log("unban was run\n\n");
 
   if(!msg.member.highestRole.hasPermissions('BAN_MEMBERS') || !msg.guild.owner) { msg.reply(`you can't use that command!`); }
   else {
-    msg.guild.unban(id)
+    msg.guild.unban(msg.member.id)
     .then(() => {msg.reply(`successfully unbanned ${user.tag}!`); })
     .catch(err => {msg.reply(`that person is already unbanned!`); console.error(err); });
   }

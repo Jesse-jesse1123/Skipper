@@ -100,9 +100,11 @@ client.on('message', async msg => {
   // if messgae starts with "!softban"...
   if(msg.content.startsWith("!softban"))
   {
+    moderation.softban(msg, array, msgInfo);
+
     //call ban and unban functions in "moderation.js" and return
-    moderation.ban(msg, array, msgInfo);
-    moderation.unban(msg, array, msgInfo);
+    // moderation.ban(msg, array, msgInfo);
+    // moderation.unban(msg, array, msgInfo);
     return;
   }
 
