@@ -85,7 +85,7 @@ client.on('message', async msg => {
   if (msg.content.startsWith("!ban"))
 	{
     // call ban function in "moderation.js" and return
-    moderation.ban(msg, array, msgInfo);
+    moderation.ban(msg);
     return;
   }
 
@@ -93,14 +93,14 @@ client.on('message', async msg => {
   if (msg.content.startsWith("!kick") && msg.mentions.users.first())
 	{
     // call kick function in "moderation.js" and return...
-    moderation.kick(msg, array[3], msgInfo);
+    moderation.kick(msg);
     return;
   }
 
   // if messgae starts with "!softban"...
   if(msg.content.startsWith("!softban"))
   {
-    moderation.softban(msg, array, msgInfo);
+    moderation.softban(msg);
 
     //call ban and unban functions in "moderation.js" and return
     // moderation.ban(msg, array, msgInfo);
@@ -112,7 +112,7 @@ client.on('message', async msg => {
   if (msg.content.startsWith("!unban")) //ID handling inside function
 	{
     // call unban function in "moderation.js" and return
-    moderation.unban(msg, array, msgInfo);
+    moderation.unban(msg);
     return;
   }
 

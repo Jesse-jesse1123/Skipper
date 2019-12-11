@@ -51,31 +51,32 @@ exports.kick = function(msg, msgInfo) {
 
 //bans, then unbans user (essentially kicks and deletes messages)
 exports.softban = function(msg) {
+  const user = msg.mentions.users.first();
   console.log("softban was run\n\n");
 
-  if(!msg.member.highestRole.hasPermissions('BAN_MEMBERS') || !msg.guild.owner) { msg.reply(`you cna't use that command!`); }
+  if(!msg.member.highestRole.hasPermission('BAN_MEMBERS') || !msg.guild.owner) { msg.reply(`you cna't use that command!`); }
   else {
     const member = msg.guild.member(user);
     if(member) {
-      member.ban(7, {reason:""})
-      .then(() => { msg.guild.unban(msg.member.id) })
+      msg.guild.ban(user, 7, {reason:""})
+      .then(msg.guild.unban(user.id))
       .then(() => { msg.reply(`Successfully softbanned ${user.tag}!`); })
-      .catch(err => { msg.reply(`I couldn't ban that person!`); console.error(err); });
+      .catch(err => { msg.reply(`I couldn't softban that person!`); console.error(err); });
     }
     else {msg.reply(`That person isn't in ther server!`); }
   }
 }
 
 //bans member
-exports.ban = function(msg) {
+exports.ban = (msg) => {
   const user = msg.mentions.users.first();
   console.log(user);
 
-  if(!msg.member.highestRole.hasPermissions('BAN_MEMBERS') || !msg.guild.owner) { msg.reply(`you can't use that command!`); }
+  if(!msg.member.highestRole.hasPermission('BAN_MEMBERS') || !msg.guild.owner) { msg.reply(`you can't use that command!`); }
   else{
     const member = msg.guild.member(user);
     if(member) {
-      member.ban(7, { reason:"" })
+      guild.ban(user.id, 7, { reason:"" })
       .then(() => { msg.reply(`Successfully banned ${user.tag}!`); })
       .catch(err => { msg.reply(`I couldn't ban that person!`); console.error(err); });
     }
@@ -87,9 +88,9 @@ exports.ban = function(msg) {
 exports.unban = function(msg) {
   console.log("unban was run\n\n");
 
-  if(!msg.member.highestRole.hasPermissions('BAN_MEMBERS') || !msg.guild.owner) { msg.reply(`you can't use that command!`); }
+  if(!msg.member.highestRole.hasPermission('BAN_MEMBERS') || !msg.guild.owner) { msg.reply(`you can't use that command!`); }
   else {
-    msg.guild.unban(msg.member.id)
+    msg.guild.unban(user.id)
     .then(() => {msg.reply(`successfully unbanned ${user.tag}!`); })
     .catch(err => {msg.reply(`that person is already unbanned!`); console.error(err); });
   }
