@@ -13,6 +13,13 @@ const client = new Discord.Client();        //for Discord client
 const embed = new Discord.RichEmbed();      //for Discord embeds
 const fs = require('fs');                   //for filestream
 
+
+/********************************************************************************
+ * "Basic Command (basCom) Function"                                            *
+ * Checks messages for basic commands                                           *
+ * The message, inviteURL, and msgInfo variables are passed into this async     *
+ *  function. This function runs only if the previous conditionals aren't met.  *
+ ********************************************************************************/
 exports.basCom = async function(msg, inviteURL, msgInfo) {
   // Check message contents for basic commands
     if (msg.content.startsWith('!ping')) {
@@ -76,7 +83,7 @@ exports.basCom = async function(msg, inviteURL, msgInfo) {
 		return;
 	}
 
-  if(msg.content.startsWith("!psuedo")) {
+  if(msg.content.startsWith("!pseudo")) {
 		console.log(msgInfo);
 		return;
 	}
