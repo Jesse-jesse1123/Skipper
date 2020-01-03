@@ -14,13 +14,16 @@ const fs = require('fs');                       //for filestream
 const embed = new Discord.RichEmbed();          //for Discord embeds
 const readFile = require('./readFile.js');      //for readFile function
 const message = require('./message.js');        //for converting messages to arrays
-const language = require('./language.js');      //for language checks
 const basCom = require('./basCom.js');          //for basic commands
 const moderation = require('./moderation.js');  //for performing moderation actions
 const welcome = require('./welcome.js');        //for welcoming people to the server
 const secret = require('./secret.js');          //not uploaded to GitHub to prevent my token from being stolen
 
-let serLang = server.langauge();
+const Lang = require('./Lang.js');
+
+let servLang = {''};
+
+servLang = buildArr();
 
 /********************************************************************************
  * "Ready Function"                                                             *
@@ -60,16 +63,6 @@ client.on('message', async msg => {
   // intialize a variable that holds the default information relating to any commands or functions run
 	const msgInfo = `Request:\n\t${msg.guild.name}\n\t${msg.author.tag} -- ${msg.author.id}\n\t${array[0]}\n\tMessage: "${msg.content}"\n\tTimestamp: ${msg.createdTimestamp}\n\n`
 
-  // check the message (array) for language
-  language.language(msg, array, serLang);
-
-	// if the message starts with "!add"
-	if(msg.content.startswith("!add") 
-	{
-		// call language function in "server.js" and return
-		server.language();
-		return;
-	}
 
   // if the message doesn't contain a mentioned user, starts with "!delete", and number specified is less than or equal to 100...
   if(!msg.mentions.users.first() && msg.content.startsWith("!delete") && Number(array[1]) <= 100)
