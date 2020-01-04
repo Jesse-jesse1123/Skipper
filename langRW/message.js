@@ -8,8 +8,8 @@
 //  Dependencies: 	                                        //
 //////////////////////////////////////////////////////////////
 
-const Discord = require('discord.js');
-const client = new Discord.Client();
+const DISCORD = require('discord.js');
+const CLIENT = new DISCORD.Client();
 
 exports.convert = function(msg) {
   //convert message to an array

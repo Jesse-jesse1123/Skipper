@@ -15,11 +15,11 @@ class Lang {
     this.#id = id;
   }
 
-  get id() {
+  get getID() {
     return this.#id;
   }
 
-  get words() {
+  get getWords() {
     return this.#words;
   }
 

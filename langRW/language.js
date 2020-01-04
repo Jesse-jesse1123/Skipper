@@ -12,14 +12,34 @@ const Discord = require('discord.js');      //for Discord library
 const client = new Discord.Client();        //for Discord client
 const Lang = require('./Lang.js');
 
-
-exports.language = (msg, servID, lang) => {
-
-
-
+//                  msg, id, servLang, array
+exports.langauge = (msg, servID, lang, array) => {
+  for(item of lang)
+    if(item.getID() === id) {
+      let words = item.getWords();
+      for(item2 of array)
+        for(item3 of words) {
+          if(item2 === item3){
+            msg.delete().catch(console.error);
+            msg.reply(`langauge! :rage:`);
+            console.log("\nWarning:");
+            console.group();
+            console.log(`${msg.author.tag} -- ${msg.author.id}\nMessage: "${msg.content}"\nTimestamp: ${msg.createdTimestamp}`);
+            console.groupEnd();
+            return;
+          }
+          else continue;
+        }
+    }
+    else continue;
+  return;
 }
 
-/*  export language function, pass in message, server ID, and server language array
+
+
+/* PSUEDOCODE
+ *
+ *  export language function, pass in message, server ID, and server language array
  *    for each item in the array (array 1)
  *      if item class ID is equal to the ID the message was sent from:
  *        for each item in corresponding class' word array (array 2)
@@ -30,6 +50,48 @@ exports.language = (msg, servID, lang) => {
  *            return;
  */
 
+
+
+/*
+ * PROTOTYPE
+ */
+// exports.language = (msg, servID, lang, array) => {
+//
+//   for(let i = 0; i < lang.length(); i++) {
+//
+//     if(lang[i].getID() === msg.guild.id) {
+//
+//       let words = lang[i].getWords();
+//
+//       for(let j = 0; j < array.length(); j++) {
+//         for(let k = 0; k < words.length(); k++) {
+//
+//           if(array[j] === words[k]) {
+//             msg.delete().catch(console.error);
+//             msg.reply(`langauge! :rage:`);
+//             console.log("\nWarning:");
+//             console.group();
+//             console.log(`${msg.author.tag} -- ${msg.author.id}\nMessage: "${msg.content}"\nTimestamp: ${msg.createdTimestamp}`);
+//             console.groupEnd();
+//             return;
+//
+//           }
+//         }
+//
+//       }
+//
+//     }
+//     else continue;
+//
+//   }
+//
+// }
+
+
+
+/*
+ * ORIGINAL
+ */
 // exports.language = function(msg, array, badWords) {
 //   //iterate through array checking for langauge
 //   let found = false;

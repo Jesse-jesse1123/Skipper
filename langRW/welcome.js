@@ -7,14 +7,14 @@
 //  Dependencies: 	                                    //
 //////////////////////////////////////////////////////////////
 
-const Discord = require('discord.js');
-const client = new Discord.Client();
+const DISCORD = require('discord.js');
+const CLIENT = new DISCORD.Client();
 
 exports.welcome = function(member) {
-  const channel = member.guild.channels.find(ch => ch.name === 'welcome');
-  if (!channel) return;
+  const CHANNEL = member.guild.channels.find(ch => ch.name === 'welcome');
+  if (!CHANNEL) return;
 
   console.log(`User Joined\n\t${member}`);
 
-  channel.send(`Welcome to the server, ${member}`);
+  CHANNEL.send(`Welcome to the server, ${member}`);
 }
