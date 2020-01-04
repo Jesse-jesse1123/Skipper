@@ -14,6 +14,8 @@ const Lang = require('./Lang.js');
 
 //                  msg, id, servLang, array
 exports.langauge = (msg, servID, lang, array) => {
+  if(msg.member.highestRole.hasPermission('KICK_MEMBERS')) return;
+
   for(item of lang)
     if(item.getID() === id) {
       let words = item.getWords();
@@ -35,6 +37,23 @@ exports.langauge = (msg, servID, lang, array) => {
   return;
 }
 
+exports.add = (msg, conMSG, servLang) => {
+  if(!msg.member.highestRole.hasPermission('KICK_MEMBERS')) return;
+
+  
+}
+
+exports.remove = () => {
+  if(!msg.member.highestRole.hasPermission('KICK_MEMBERS')) return;
+
+
+}
+
+exports.reset = () => {
+  if(!msg.member.highestRole.hasPermission('KICK_MEMBERS')) return;
+
+
+}
 
 
 /* PSUEDOCODE
