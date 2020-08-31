@@ -45,8 +45,6 @@ exports.kick = function(msg, msgInfo) {
     }
     else { msg.reply(`that person isn't in the server!`); }
   }
-
-
 }
 
 //bans, then unbans user (essentially kicks and deletes messages)
