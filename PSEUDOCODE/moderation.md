@@ -1,9 +1,9 @@
-# moderation.js Psuedocode
+# moderation.js Pseudocode
 
 ## Description
 `moderation.js`'s purpose is to handle moderation commands requested by the owner or users with roles that have perms to kick or ban users.
 
-## Psuedocode
+## Pseudocode
 ```javascript
 /* acquire Discord JS library
  * create new client object
@@ -36,7 +36,7 @@
  *
  * export unban function with passed value of message object
  * 	log in console that unban function was run
- * 	
+ *
  *	if the message author's highest role does not have ban members perm, or they are not the server owner
  *		reply to message author that they can't use that command
  *	otherwise

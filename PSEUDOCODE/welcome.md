@@ -1,4 +1,4 @@
-# welcome.js Psuedocode
+# welcome.js Pseudocode
 
 ```javascript
 /* acquire Discord JS library

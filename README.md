@@ -3,8 +3,8 @@ Skipper Discord Bot
 
 First personal project
 
-All psuedocode files give explanation as to how the corresponding JS code works
-	-> Psuedocode is written in the same formatting as the code being explained
+All Pseudocode files give explanation as to how the corresponding JS code works
+	-> Pseudocode is written in the same formatting as the code being explained
 
 ## Dependencies
 Skipper requires the `discord.js` library and a text file containing language
@@ -12,7 +12,7 @@ Skipper requires the `discord.js` library and a text file containing language
 
 ## PLANS
 1. Implementing ability to add words to bot language database
-2. ~~Implementing moving psuedocode to individual files~~
+2. ~~Implementing moving Pseudocode to individual files~~
 3. Implementing ability to turn certain words on or off
 4. **Implementing ability for bot to add and remove roles from users**
 5. Implementing ability for bot to use Spotify/Youtube API to search songs

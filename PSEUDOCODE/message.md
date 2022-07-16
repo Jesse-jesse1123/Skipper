@@ -1,4 +1,4 @@
-# message.js Psuedocode
+# message.js Pseudocode
 
 ```javascript
 /* include discord library

@@ -1,4 +1,4 @@
-# bot.js Psuedocode
+# bot.js Pseudocode
 
 ```javascript
 /* create const 'Discord' variable and initialize it as file path to Discord JS library
@@ -39,7 +39,7 @@
  *
  * 		or if the message does not mention a user, the message starts with "!delete", and the value at array index 1 as a number is less than or equal to 100
  *			call delete1 function (in 'moderation.js') and pass in message object and array index 1
- *		
+ *
  *		of if the message mentions a user, the message starts with "!delete", and the value at array index 5 as a number is less than or equal to 100
  *			call delete2 function (in 'moderation.js') and pass in message object andarray index 5
  *

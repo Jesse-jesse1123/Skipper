@@ -1,4 +1,4 @@
-# basCome Psuedocode
+# basCome Pseudocode
 
 ```javascript
 /* Acquire the Discord JS library
@@ -12,7 +12,7 @@
  *
  * 		send reply to message author saying "Pong!" and provide client ping
  * 		log in console the 'msgInfo' variable
- * 	
+ *
  * 	if the message starts with "!avatar"
  * 		send reply to message author with a URL for their profile picture
  *		log in console the 'msgInfo' variable
@@ -31,7 +31,7 @@
  *				extra field 2:   displays the number of uses (to be implemented at a later date)
  *
  *			send the embed to the channel command was sent from
- *	
+ *
  *	log in console the 'msgInfo' variable
  */
 ```
