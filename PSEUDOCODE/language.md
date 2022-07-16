@@ -1,9 +1,9 @@
-# language.js Psuedocode
+# language.js Pseudocode
 
 ## Description
 `language.js`'s purpose is to check messages for any words found in the `language.txt` file
 
-## Psuedocode
+## Pseudocode
 ```javascript
 /* file header with pertinent information
  *

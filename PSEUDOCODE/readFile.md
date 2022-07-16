@@ -1,4 +1,4 @@
-# readFile.js Psuedocode
+# readFile.js Pseudocode
 
 ```javascript
 /* acquire the filestream library
